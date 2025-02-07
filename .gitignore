@@ -1,0 +1,39 @@
+# Node.js and npm (backend)
+backend/node_modules/
+backend/package-lock.json  # Or backend/yarn.lock
+# backend/.env
+backend/*.log
+backend/.mongodump/
+backend/data/
+backend/.vscode/
+backend/.idea/
+
+# React (frontend)
+frontend/node_modules/
+frontend/package-lock.json # Or frontend/yarn.lock
+frontend/build/
+frontend/public/build
+# frontend/.env
+frontend/.vscode/
+frontend/.idea/
+
+# Root level (anything else)
+# .env                     # If you have any root-level environment variables
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.tmp
+tmp/
+temp/
+.cache/
+__pycache__/
+*.pyc
+config.js                # Sensitive config files (NEVER commit)
+credentials.json
+secrets.json
+.dockerignore
+coverage/
+*.test.js.snap
+.serverless/
