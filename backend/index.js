@@ -46,5 +46,21 @@ app.post("/addItem", async (req, res) => {
   }
 });
 
+// API Route to fetch all items
+app.get("/getItems", async (req, res) => {
+  try {
+    const database = client.db("inventoryDB");
+    const collection = database.collection("items");
+    const items = await collection.find({}).toArray(); // Fetch all items from DB
+
+    res.status(200).json(items); // Send the list of items as the response
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+
 // Start Server
 app.listen(port, () => console.log(`🚀 Server running on port ${port}`));

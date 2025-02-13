@@ -1,1 +1,50 @@
-/*Add css code for table to display items, with edit,delete and add button*/
+.item-list-container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .add-button-container {
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  
+  .add-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-button:hover {
+    background-color: #3e8e41;
+  }
+  
+  .item-list-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  td {
+    text-align: center;
+  }
+  
+  tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
