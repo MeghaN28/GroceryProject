@@ -13,6 +13,7 @@ export default function App() {
       <Routes>
         <Route path="/getitem" element={<DisplayItems />} />
         <Route path="/edititem" element={<AddEditItems />} />
+        <Route path="/edititem/:id" element={<AddEditItems />} />
         <Route path="/recipe" element={<RecipePage />} />
         <Route path="*" element={<DisplayItems />} />
       </Routes>
