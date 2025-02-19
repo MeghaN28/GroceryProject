@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
+import "./AddEditItems.css";
 function AddEditItems() {
-  const { id } = useParams(); // Get the item ID from the URL if editing
-  const location = useLocation(); // Get item data when editing
+  const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -43,22 +43,74 @@ function AddEditItems() {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "20px", textAlign: "center" }}>
+    <div className="container">
       <h2>{id ? "Edit Item" : "Insert Item into Inventory"}</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="itemName" placeholder="Item Name" value={formData.itemName} onChange={handleChange} required />
-        <br />
-        <input type="text" name="category" placeholder="Category" value={formData.category} onChange={handleChange} required />
-        <br />
-        <input type="number" name="quantity" placeholder="Quantity" value={formData.quantity} onChange={handleChange} required />
-        <br />
-        <label>Date of Purchase:</label>
-        <input type="date" name="dateOfPurchase" value={formData.dateOfPurchase} onChange={handleChange} required />
-        <br />
-        <label>Date of Expiration:</label>
-        <input type="date" name="dateOfExpiration" value={formData.dateOfExpiration} onChange={handleChange} required />
-        <br />
-        <button type="submit">{id ? "Update" : "Submit"}</button>
+        <div className="form-group">
+          <input
+            type="text"
+            name="itemName"
+            placeholder="Item Name"
+            value={formData.itemName}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
+
+        <div className="form-group">
+          <input
+            type="text"
+            name="category"
+            placeholder="Category"
+            value={formData.category}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
+
+        <div className="form-group">
+          <input
+            type="number"
+            name="quantity"
+            placeholder="Quantity"
+            value={formData.quantity}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Date of Purchase:</label>
+          <input
+            type="date"
+            name="dateOfPurchase"
+            value={formData.dateOfPurchase}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Date of Expiration:</label>
+          <input
+            type="date"
+            name="dateOfExpiration"
+            value={formData.dateOfExpiration}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
+
+        <div className="form-actions">
+          <button type="submit" className="btn btn-primary">
+            {id ? "Update" : "Submit"}
+          </button>
+        </div>
       </form>
     </div>
   );

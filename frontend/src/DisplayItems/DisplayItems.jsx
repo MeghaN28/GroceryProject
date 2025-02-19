@@ -43,12 +43,13 @@ function DisplayItems() {
   };
 
   return (
-    <div className="item-list-container">
-      <div className="add-button-container">
+    <div>
+       <div className="add-button-container">
         <Link to="/edititem">
-          <button className="add-button">Add</button>
+          <button className="add-button">Add New Item</button>
         </Link>
       </div>
+    <div className="item-list-container">
       <table className="item-list-table">
         <thead>
           <tr>
@@ -66,9 +67,9 @@ function DisplayItems() {
               key={item._id}
               style={{
                 backgroundColor: isExpired(item.dateOfExpiration)
-                  ? "red"
+                  ? "#ffcccc" // Light red for expired
                   : isExpiringSoon(item.dateOfExpiration)
-                  ? "yellow"
+                  ? "#fff0b3" // Light yellow for expiring soon
                   : "transparent",
               }}
             >
@@ -78,10 +79,19 @@ function DisplayItems() {
               <td>{item.dateOfPurchase}</td>
               <td>{item.dateOfExpiration}</td>
               <td>
-                <button onClick={() => navigate(`/edititem/${item._id}`, { state: { item } })}>
+                <button
+                  className="btn btn-primary"
+                  onClick={() =>
+                    navigate(`/edititem/${item._id}`, { state: { item } })
+                  }
+                >
                   Edit
                 </button>
-                <button onClick={() => handleDelete(item._id)} style={{ marginLeft: "5px", color: "red" }}>
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(item._id)}
+                  style={{ marginLeft: "5px" }}
+                >
                   Delete
                 </button>
               </td>
@@ -89,6 +99,7 @@ function DisplayItems() {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 }

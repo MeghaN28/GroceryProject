@@ -28,3 +28,12 @@ In to the MongoDB Atlas CLI on your system login to atlas via atlas auth login u
 
 Then you connect to the database using database user credentials (team_member1 and secure_password) to access myDatabase with readWrite privileges.(I will share on teams seperately)
 
+Install Ollama 
+Then run ollama serve seperately on a tab to start the ollama server
+then ai prompt request will be working
+Ensure
+- backend running
+- ollama running
+- frontend running
+
+

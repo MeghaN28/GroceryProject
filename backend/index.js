@@ -60,6 +60,19 @@ app.get("/getItems", async (req, res) => {
   }
 });
 
+app.get("/getExpiringItems", async (req, res) => {
+  try {
+    const database = client.db("inventoryDB");
+    const collection = database.collection("items");
+    const items = await getExpiringItems(); // Fetch all items from DB
+
+    res.status(200).json(items); // Send the list of items as the response
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // API Route to update an item
 app.put("/updateItem/:id", async (req, res) => {
   try {
@@ -95,7 +108,7 @@ app.put("/updateItem/:id", async (req, res) => {
   }
 });
 
-// API Route to delete an item
+
 app.delete("/deleteItem/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -112,6 +125,67 @@ app.delete("/deleteItem/:id", async (req, res) => {
 });
 
 
+async function getExpiringItems() {
+  const database = client.db("inventoryDB");
+  const collection = database.collection("items");
 
-// Start Server
+  // Get today's date and calculate the date 2 days from today
+  const today = new Date();
+  const twoDaysLater = new Date(today);
+  twoDaysLater.setDate(today.getDate() + 2);
+
+  // Fetch all items from the collection
+  const expiringItems = await collection.find({}).toArray();
+
+  // Filter items where the dateOfExpiration is within the next 2 days but not in the past
+  const filteredExpiringItems = [];
+  const seenItemNames = new Set(); // Used to track unique item names
+
+  for (const item of expiringItems) {
+    const expirationDate = new Date(item.dateOfExpiration);
+    
+    // Check if the item expiration date is within the next 2 days and not already expired
+    if (expirationDate > today && expirationDate <= twoDaysLater && !seenItemNames.has(item.itemName)|| expirationDate<today) {
+      filteredExpiringItems.push(item);
+      seenItemNames.add(item.itemName); // Mark this item as seen
+    }
+  }
+
+  console.log(filteredExpiringItems);
+  return filteredExpiringItems;
+}
+
+const axios = require("axios");
+
+
+app.post("/getRecipe", async (req, res) => {
+  try {
+   
+    const expiringItems = await getExpiringItems();
+
+    
+    const itemsList = expiringItems.map(item => `${item.itemName}`).join("\n");
+    const prompt = `I have the following items expiring soon:\n${itemsList}\nCan you suggest 1 recipe for these items in just 200 words?`;
+
+    
+    const ollamaResponse = await axios({
+      method: "post",
+      url: "http://127.0.0.1:11434/api/generate",
+      data: {
+        model: "tinyllama",
+        prompt: prompt,
+        stream: false, 
+      },
+    });
+
+    
+    res.status(200).json({ recipe: ollamaResponse.data.response });
+
+  } catch (error) {
+    console.error("Error fetching recipe from Ollama:", error);
+    res.status(500).json({ error: "Failed to get the recipe from Ollama." });
+  }
+});
+
+
 app.listen(port, () => console.log(`🚀 Server running on port ${port}`));

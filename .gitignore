@@ -16,7 +16,7 @@ frontend/public/build
 # frontend/.env
 frontend/.vscode/
 frontend/.idea/
-
+frontend/grocery-app-react/node_modules/
 # Root level (anything else)
 # .env                     # If you have any root-level environment variables
 *.log

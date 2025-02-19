@@ -1,50 +1,97 @@
+/* Container for the table */
 .item-list-container {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .add-button-container {
-    text-align: right;
-    margin-bottom: 10px;
-  }
-  
-  .add-button {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .add-button:hover {
-    background-color: #3e8e41;
-  }
-  
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Styling for the add button container */
+.add-button-container {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+/* Add button styling */
+.add-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  width:120px;
+  height:50px;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+/* Table styles */
+.item-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.item-list-table th,
+.item-list-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.item-list-table th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.item-list-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.item-list-table tr {
+  transition: background-color 0.3s ease;
+}
+
+/* Action button styling */
+.item-list-table button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  width:80px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Edit button styling */
+.item-list-table button:hover {
+  background-color: #3e8e41;
+}
+
+/* Delete button styling */
+.item-list-table button.delete-btn {
+  color: red;
+  border: 1px solid red;
+  width:80px;
+  background-color: transparent;
+}
+
+.item-list-table button.delete-btn:hover {
+  background-color: red;
+  color: white;
+}
+
+/* Responsive design: Stack table on smaller screens */
+@media (max-width: 768px) {
   .item-list-table {
-    width: 100%;
-    border-collapse: collapse;
+    display: block;
+    overflow-x: auto;
   }
-  
-  th, td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-  }
-  
-  td {
+
+  .add-button-container {
     text-align: center;
   }
-  
-  tr {
-    transition: background-color 0.3s ease;
-  }
-  
-  tr:hover {
-    background-color: #f1f1f1;
-  }
+}
