@@ -157,7 +157,11 @@ app.post("/getRecipe", async (req, res) => {
   try {
    
     const expiringItems = await getExpiringItems();
-
+    
+    if(expiringItems==null || expiringItems=="")
+    {
+      res.status(200).json({ });
+    }
     
     const itemsList = expiringItems.map(item => `${item.itemName}`).join("\n");
     const prompt = `I have the following items expiring soon:\n${itemsList}\nCan you suggest 1 recipe for these items in just 200 words?`;
