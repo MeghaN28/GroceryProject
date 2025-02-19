@@ -7,29 +7,38 @@ const Navbar = () => {
   const [expiringItems, setExpiringItems] = useState([]);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  useEffect(() => {
-    // Fetch expiring items from the backend
-    const fetchExpiringItems = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/getExpiringItems"); // Update with your backend route
-        // Update expiringItems to extract both itemName and dateOfExpiration
-        if (response.data && response.data.length) {
-          const items = response.data.map(item => `${item.itemName}`);
-          setExpiringItems(items);
-        }
-      } catch (error) {
-        console.error("Error fetching expiring items:", error);
+  const fetchExpiringItems = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/getExpiringItems");
+      if (response.data && response.data.length) {
+        const items = response.data.map(item => item.itemName);
+        setExpiringItems(items);
+      } else {
+        setExpiringItems([]);
       }
+    } catch (error) {
+      console.error("Error fetching expiring items:", error);
+      setExpiringItems([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchExpiringItems(); // Initial fetch
+
+    const handleItemsUpdated = () => {
+      fetchExpiringItems();
     };
 
-    fetchExpiringItems();
+    window.addEventListener('itemsUpdated', handleItemsUpdated);
+
+    return () => window.removeEventListener('itemsUpdated', handleItemsUpdated);
   }, []);
 
   return (
     <nav className="navbar">
       <div className="navbar-left">
         <Link to="/" className="logo">
-          Grocery App 
+          Pantry Pal
         </Link>
       </div>
       <div className="navbar-center">
@@ -46,7 +55,6 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-right">
-        {/* Bell Icon */}
         <div
           className="bell-container"
           onMouseEnter={() => setShowTooltip(true)}

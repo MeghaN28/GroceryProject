@@ -15,6 +15,7 @@ function DisplayItems() {
     try {
       const response = await axios.get("http://localhost:5000/getItems");
       setItems(response.data);
+      window.dispatchEvent(new Event('itemsUpdated')); 
     } catch (error) {
       console.error("Error fetching items:", error);
     }
@@ -44,13 +45,13 @@ function DisplayItems() {
 
   return (
     <div>
-         <h2 className="text">🌿 Pantry Preview</h2>
-       <div className="add-button-container">
+    <div className="item-list-container">
+    <div className="header-container"> {/* New container for header and button */}
+        <h2 className="text">🌿 Pantry Preview</h2>
         <Link to="/edititem">
           <button className="add-button">Add New Item</button>
         </Link>
-      </div>
-    <div className="item-list-container">
+        </div>
       <table className="item-list-table">
         <thead>
           <tr>

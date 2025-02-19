@@ -30,11 +30,11 @@ const RecipePage = () => {
         <p>Loading recipe...</p>
       ) : recipe ? (
         <div className="recipe-container">
-          <h2>Suggested Recipe:</h2>
+          <h2 class="text">Suggested Recipe:</h2>
           <p>{recipe}</p> {}
         </div>
       ) : (
-        <p>No recipe found for the selected items.</p>
+        <p>No recipe found as no items are expiring!</p>
       )}
     </div>
   );

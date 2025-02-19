@@ -48,7 +48,7 @@
 }
 
 .item-list-table th {
-  background-color: #4CAF50;
+  background-color: rgba(180, 171, 171, 0.801);
   color: white;
 }
 
@@ -98,4 +98,10 @@
   .add-button-container {
     text-align: center;
   }
+}
+.header-container {
+  display: flex; /* Enable Flexbox */
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center; /* Vertically align items */
+  margin-bottom: 20px; /* Add some space below the header */
 }
