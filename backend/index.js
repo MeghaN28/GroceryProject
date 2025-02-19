@@ -129,22 +129,17 @@ async function getExpiringItems() {
   const database = client.db("inventoryDB");
   const collection = database.collection("items");
 
-  // Get today's date and calculate the date 2 days from today
   const today = new Date();
   const twoDaysLater = new Date(today);
   twoDaysLater.setDate(today.getDate() + 2);
-
-  // Fetch all items from the collection
   const expiringItems = await collection.find({}).toArray();
 
-  // Filter items where the dateOfExpiration is within the next 2 days but not in the past
   const filteredExpiringItems = [];
   const seenItemNames = new Set(); // Used to track unique item names
 
   for (const item of expiringItems) {
     const expirationDate = new Date(item.dateOfExpiration);
     
-    // Check if the item expiration date is within the next 2 days and not already expired
     if (expirationDate > today && expirationDate <= twoDaysLater && !seenItemNames.has(item.itemName)|| expirationDate<today) {
       filteredExpiringItems.push(item);
       seenItemNames.add(item.itemName); // Mark this item as seen

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./RecipePage.css"; // Optional: Style for your page
+import "./RecipePage.css"; 
 
 const RecipePage = () => {
   const [recipe, setRecipe] = useState(null);
@@ -10,10 +10,9 @@ const RecipePage = () => {
     const fetchRecipe = async () => {
       try {
         setIsLoading(true);
-        // Send request to backend to fetch recipe based on expiring items
         const response = await axios.post("http://localhost:5000/getRecipe");
         console.log(response);
-        setRecipe(response.data.recipe); // ✅ Updated: Now matches the backend response field
+        setRecipe(response.data.recipe); // 
       } catch (error) {
         console.error("Error fetching recipe:", error);
       } finally {
@@ -22,7 +21,7 @@ const RecipePage = () => {
     };
 
     fetchRecipe();
-  }, []); // Empty dependency array ensures this runs once when component mounts
+  }, []);
 
   return (
     <div className="recipe-page">
@@ -32,7 +31,7 @@ const RecipePage = () => {
       ) : recipe ? (
         <div className="recipe-container">
           <h2>Suggested Recipe:</h2>
-          <p>{recipe}</p> {/* ✅ Displays the recipe returned from Ollama */}
+          <p>{recipe}</p> {}
         </div>
       ) : (
         <p>No recipe found for the selected items.</p>
