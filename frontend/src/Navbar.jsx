@@ -61,11 +61,6 @@ const Navbar = () => {
             </div>
           )}
         </div>
-
-        {/* User Icon */}
-        <Link to="/account" className="user-icon">
-          <i className="fas fa-user"></i>
-        </Link>
       </div>
     </nav>
   );

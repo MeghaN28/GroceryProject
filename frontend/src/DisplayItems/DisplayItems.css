@@ -4,6 +4,10 @@
   padding: 20px;
   box-sizing: border-box;
 }
+.text
+{
+  color:black;
+}
 
 /* Styling for the add button container */
 .add-button-container {

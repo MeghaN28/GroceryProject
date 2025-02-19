@@ -44,6 +44,7 @@ function DisplayItems() {
 
   return (
     <div>
+         <h2 className="text">🌿 Pantry Preview</h2>
        <div className="add-button-container">
         <Link to="/edititem">
           <button className="add-button">Add New Item</button>

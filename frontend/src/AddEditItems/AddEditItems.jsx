@@ -44,7 +44,7 @@ function AddEditItems() {
 
   return (
     <div className="container">
-      <h2>{id ? "Edit Item" : "Insert Item into Inventory"}</h2>
+      <h2>{id ? "Edit Item" : "💡 Quick Fix"}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <input
