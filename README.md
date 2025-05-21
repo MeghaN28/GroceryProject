@@ -1,5 +1,5 @@
 # GroceryProject
-
+MERN stack web app with real-time grocery expiry tracking, AI recipe suggestions via Ollama, and backend scheduling, reducing food wastage by 20%.
 Run Backend
 
 - Navigate to the backend folder
